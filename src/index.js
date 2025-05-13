@@ -1,12 +1,10 @@
 import express from "express";
-import { PageTemplate } from "./templates/PageTemplate.js";
+import { pageRouter } from "./router/pageRouter.js";
 
 const app = express();
 
 app.use(express.static("public"));
-app.use("/", (req, res) => {
-  res.send(new PageTemplate().render());
-});
+app.use("/", pageRouter);
 
 app.listen(5430, () => {
   console.log(`Serveris: http://localhost:5430`);
