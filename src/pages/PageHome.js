@@ -1,3 +1,4 @@
+import { categoriesList } from "../components/categoriesList.js";
 import { PageTemplate } from "../templates/PageTemplate.js";
 
 export class PageHome extends PageTemplate {
@@ -12,10 +13,10 @@ export class PageHome extends PageTemplate {
     <div class="row">
       <div class="col-lg-7 text-center text-lg-start">
         <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
-          Vartojas nėra autentifikuotas
+          User is not logged in
         </h1>
         <p class="col-lg-10 fs-4">
-          Žemiau matoma informacija yra viešai prienama, jei norite redaguoti duomenis prašome prisijungti prie sistemos
+          The information below is publicly available. If you wish to edit the data, please log in to the system.
         </p>
       </div>
       <div class="col-md-10 ms-auto col-lg-5">
@@ -52,8 +53,41 @@ export class PageHome extends PageTemplate {
   </div>`;
   }
 
+  mastersCategory() {
+    return `
+
+<div class="container px-4 py-5" id="hanging-icons">
+  <h2 class="pb-2 border-bottom">Masters by category</h2>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    ${categoriesList()}
+  </div>
+</div>
+`;
+  }
+
+  viewAll() {
+    return `
+<main class="container">
+  <div class="bg-body-tertiary p-5 rounded mt-3">
+    <h1>More details:</h1>
+    <p class="lead">
+      If you want to see all available masters, view their ratings, rate a master, or browse all available workshops, click below:
+    </p>
+    <a class="btn btn-lg btn-primary" href="/masters" role="button"
+      >View all masters
+    </a>
+    <a class="btn btn-lg btn-primary" href="/workshops" role="button"
+      >View available workshops
+    </a>
+  </div>
+</main>
+  `;
+  }
+
   main() {
     return `
-    ${this.signForm()}`;
+    ${this.signForm()}
+    ${this.mastersCategory()};
+    ${this.viewAll()}`;
   }
 }

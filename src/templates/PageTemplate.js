@@ -26,7 +26,7 @@ export class PageTemplate {
     const publicMenu = [
       { href: "/", text: "Home" },
       { href: "/masters", text: "Masters" },
-      { href: "/services", text: "Services" },
+      { href: "/workshops", text: "Workshops" },
     ];
 
     const authMenu = [
