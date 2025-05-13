@@ -1,14 +1,23 @@
 import { PageTemplate } from "../templates/PageTemplate.js";
 
 export class PageHome extends PageTemplate {
-  constructor() {
-    super();
+  constructor(req) {
+    super(req);
     this.activeMenuIndex = 0;
+    this.pageJS = "login";
   }
   signForm() {
     return `
    <div class="container">
     <div class="row">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">
+          Vartojas nėra autentifikuotas
+        </h1>
+        <p class="col-lg-10 fs-4">
+          Žemiau matoma informacija yra viešai prienama, jei norite redaguoti duomenis prašome prisijungti prie sistemos
+        </p>
+      </div>
       <div class="col-md-10 ms-auto col-lg-5">
       <div id="error" class="alert alert-danger d-none" role="alert">
         A simple danger alert—check it out!

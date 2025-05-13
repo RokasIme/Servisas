@@ -1,6 +1,11 @@
 import { PageTemplate } from "../templates/PageTemplate.js";
 
 export class PageLogin extends PageTemplate {
+  constructor(req) {
+    super(req);
+    this.pageJS = "login";
+    this.activeMenuIndex = 3;
+  }
   main() {
     return `
 <main>
