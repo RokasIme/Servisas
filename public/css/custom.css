@@ -1,0 +1,28 @@
+.photo {
+  width: 100%;
+  position: relative;
+}
+
+.photo img {
+  object-fit: cover;
+  object-position: center;
+  height: 225px;
+}
+
+.photo i {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  color: #fff;
+  font-size: 1.2rem;
+}
+.photo i:hover {
+  color: red;
+}
+
+.photo .like-count {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  color: #fff;
+}

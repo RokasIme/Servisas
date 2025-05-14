@@ -1,5 +1,6 @@
 export class PageTemplate {
-  constructor() {
+  constructor(req) {
+    this.req = req;
     this.activeMenuIndex = -1;
     this.pageJS = "";
   }
@@ -17,6 +18,9 @@ export class PageTemplate {
         <meta name="apple-mobile-web-app-title" content="MyWebSite" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/custom.css">
+
     </head>`;
   }
 
