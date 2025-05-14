@@ -6,8 +6,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
-app.use("/", pageRouter);
 app.use("/", apiRouter);
+app.use("/", pageRouter);
 
 app.listen(5430, () => {
   console.log(`Serveris: http://localhost:5430`);

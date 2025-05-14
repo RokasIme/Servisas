@@ -1,5 +1,7 @@
 import { categoriesList } from "../components/categoriesList.js";
 import { PageTemplate } from "../templates/PageTemplate.js";
+// const homeLoginDOM = document.querySelector(".home-login-section");
+// homeLoginDOM.classList.add("d-none");
 
 export class PageHome extends PageTemplate {
   constructor(req) {
@@ -7,9 +9,14 @@ export class PageHome extends PageTemplate {
     this.activeMenuIndex = 0;
     this.pageJS = "login";
   }
+
   signForm() {
-    return `
-   <div class="container">
+    const userIsLoggedIn = this.req.headers.cookie !== undefined;
+
+    return userIsLoggedIn
+      ? ""
+      : `
+   <div class="home-login-section container">
     <div class="row">
       <div class="col-lg-7 text-center text-lg-start">
         <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">

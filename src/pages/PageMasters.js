@@ -5,6 +5,7 @@ export class PageMasters extends PageTemplate {
   constructor(req) {
     super(req);
     this.activeMenuIndex = 1;
+    this.pageJS = "masters-like";
   }
 
   masters(category) {
@@ -18,7 +19,7 @@ export class PageMasters extends PageTemplate {
           <div class="photo">
             <img class="bd-placeholder-img card-img-top" src="/img/${master.img}" alt="Photo" />
             <div class="like-count">0</div>
-            <i class="click-count fa fa-heart" aria-hidden="true"></i>
+            <i class="click-heart fa fa-heart" aria-hidden="true"></i>
           </div>
           <div class="card-body">
             <h4 class="card-text">${master.name} ${master.lastName}</h4>

@@ -4,6 +4,7 @@ import { PageLogin } from "../pages/PageLogin.js";
 import { PageRegister } from "../pages/PageRegister.js";
 import { Page404 } from "../pages/Page404.js";
 import { PageMasters } from "../pages/PageMasters.js";
+import { PageLogout } from "../pages/PageLogout.js";
 
 export const pageRouter = express.Router();
 
@@ -18,4 +19,6 @@ pageRouter.get("/masters", (req, res) =>
 pageRouter.get("/masters/:category", (req, res) =>
   res.send(new PageMasters(req).render())
 );
+pageRouter.get("/logout", (req, res) => res.send(new PageLogout(req).render()));
+
 pageRouter.get("*error", (req, res) => res.send(new Page404(req).render()));

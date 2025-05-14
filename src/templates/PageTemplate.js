@@ -25,7 +25,7 @@ export class PageTemplate {
   }
 
   header() {
-    const userIsLoggedIn = false;
+    const userIsLoggedIn = this.req.headers.cookie !== undefined;
 
     const publicMenu = [
       { href: "/", text: "Home" },

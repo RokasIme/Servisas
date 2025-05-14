@@ -5,7 +5,6 @@ const passwordDOM = document.getElementById("password");
 
 if (formDOM) {
   formDOM.addEventListener("submit", (event) => {
-    console.log("pagavau");
     event.preventDefault();
     alertDOM.classList.add("d-none");
     alertDOM.innerText = "";
@@ -33,6 +32,8 @@ if (formDOM) {
           alertDOM.innerText = data.msg;
           alertDOM.classList.remove("d-none", "alert-danger");
           alertDOM.classList.add("alert-success");
+
+          location.href = "/";
         }
       })
       .catch((err) => console.log(err));
