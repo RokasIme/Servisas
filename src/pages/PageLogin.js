@@ -1,3 +1,4 @@
+import { NODE_ENV } from "../../env.js";
 import { PageTemplate } from "../templates/PageTemplate.js";
 
 export class PageLogin extends PageTemplate {
@@ -7,6 +8,9 @@ export class PageLogin extends PageTemplate {
     this.activeMenuIndex = 3;
   }
   main() {
+    const email = NODE_ENV === "dev" ? "rokas.imelinskas@gmail.com" : "";
+    const password = NODE_ENV === "dev" ? "rokas.imelinskas@gmail.com" : "";
+
     return `
 <main>
   <div class="container">
@@ -20,6 +24,7 @@ export class PageLogin extends PageTemplate {
           <div class="form-floating mb-3">
             <input
               type="email"
+              value ="${email}"
               class="form-control"
               id="email"
               placeholder="name@example.com"
@@ -29,6 +34,7 @@ export class PageLogin extends PageTemplate {
           <div class="form-floating mb-3">
             <input
               type="password"
+              value ="${password}"
               class="form-control"
               id="password"
               placeholder="Password"
