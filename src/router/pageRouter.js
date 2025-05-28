@@ -9,20 +9,28 @@ import { PageWorshops } from "../pages/public/PageWorkshops.js";
 
 export const pageRouter = express.Router();
 
-pageRouter.get("/", (req, res) => res.send(new PageHome(req).render()));
-pageRouter.get("/login", (req, res) => res.send(new PageLogin(req).render()));
-pageRouter.get("/register", (req, res) =>
-  res.send(new PageRegister(req).render())
+pageRouter.get("/", async (req, res) =>
+  res.send(await new PageHome(req).render())
 );
-pageRouter.get("/masters", (req, res) =>
-  res.send(new PageMasters(req).render())
+pageRouter.get("/login", async (req, res) =>
+  res.send(await new PageLogin(req).render())
 );
-pageRouter.get("/masters/:category", (req, res) =>
-  res.send(new PageMasters(req).render())
+pageRouter.get("/register", async (req, res) =>
+  res.send(await new PageRegister(req).render())
 );
-pageRouter.get("/workshops", (req, res) =>
-  res.send(new PageWorshops(req).render())
+pageRouter.get("/masters", async (req, res) =>
+  res.send(await new PageMasters(req).render())
 );
-pageRouter.get("/logout", (req, res) => res.send(new PageLogout(req).render()));
+pageRouter.get("/masters/:category", async (req, res) =>
+  res.send(await new PageMasters(req).render())
+);
+pageRouter.get("/workshops", async (req, res) =>
+  res.send(await new PageWorshops(req).render())
+);
+pageRouter.get("/logout", async (req, res) =>
+  res.send(await new PageLogout(req).render())
+);
 
-pageRouter.get("*error", (req, res) => res.send(new Page404(req).render()));
+pageRouter.get("*error", async (req, res) =>
+  res.send(await new Page404(req).render())
+);

@@ -1,6 +1,5 @@
-import { mastersData } from "../../data/masters.js";
-import { workshopsData } from "../../data/workshops.js";
 import { PageTemplate } from "../../templates/PageTemplate.js";
+import { getWorkShops, getMastersByWorkshop } from "../../db/public/masters.js";
 
 export class PageWorshops extends PageTemplate {
   constructor(req) {
@@ -9,16 +8,17 @@ export class PageWorshops extends PageTemplate {
     this.pageJS = "masters-like";
   }
 
-  workshops() {
-    let html = "";
-    const category = "";
+  async workshops() {
+    const workshops = await getWorkShops();
 
-    for (let i = 0; i < workshopsData.length; i++) {
+    let html = "";
+
+    for (let i = 0; i < workshops.length; i++) {
       html += `<section class="text-center container">
     <div class="row ">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">${workshopsData[i].service}</h1>
-        <p class="lead text-body-secondary">${workshopsData[i].city}, ${workshopsData[i].adress}</p>
+        <h1 class="fw-light">${workshops[i].workshop}</h1>
+        <p class="lead text-body-secondary">${workshops[i].city}, ${workshops[i].adress}</p>
       </div>
     </div>
   </section>
@@ -29,9 +29,12 @@ export class PageWorshops extends PageTemplate {
   
         `;
 
-      for (const master of mastersData) {
-        if (master.service === workshopsData[i].service) {
-          html += `
+      const mastersByWorkshop = await getMastersByWorkshop(
+        workshops[i].workshop
+      );
+
+      for (const master of mastersByWorkshop) {
+        html += `
             <div class="col">
               <div class="card shadow-sm">
                 <div class="photo">
@@ -41,14 +44,14 @@ export class PageWorshops extends PageTemplate {
                 </div>
                 <div class="card-body">
                   <h4 class="card-text">${master.name} ${master.lastName}</h4>
-                  <p class="card-text">Category: ${master.specialization}</p>
-                  <p class="card-text">Workshop: ${master.service}, ${master.city}</p>
-                  <p class="card-text">Experience: ${master.experiece}</p>
+                  <p class="card-text">Category: ${master.category}</p>
+                  <p class="card-text">Workshop: ${master.workshop}, ${master.city}</p>
+                  <p class="card-text">Experience: ${master.experience}</p>
       
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="/masters/${master.slug}" class="btn btn-sm btn-outline-secondary">
-                        View all this category masters
+                      <a href="/masters/${master.url_slug}" class="btn btn-sm btn-outline-secondary">
+                        View all ${master.category}'s
                       </a>
                     </div>
                   </div>
@@ -56,7 +59,6 @@ export class PageWorshops extends PageTemplate {
               </div>
             </div>
               `;
-        }
       }
       html += `
             </div>
@@ -66,10 +68,10 @@ export class PageWorshops extends PageTemplate {
     return html;
   }
 
-  main() {
+  async main() {
     return `
     <main>
-        ${this.workshops()}
+        ${await this.workshops()}
     </main>`;
   }
 }

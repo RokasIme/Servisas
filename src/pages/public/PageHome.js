@@ -1,4 +1,5 @@
 import { categoriesList } from "../../components/categoriesList.js";
+import { getAllCategories } from "../../db/public/categories.js";
 import { PageTemplate } from "../../templates/PageTemplate.js";
 // const homeLoginDOM = document.querySelector(".home-login-section");
 // homeLoginDOM.classList.add("d-none");
@@ -60,13 +61,14 @@ export class PageHome extends PageTemplate {
   </div>`;
   }
 
-  mastersCategory() {
+  async mastersCategory() {
+    const data = await getAllCategories();
     return `
 
 <div class="container px-4 py-5" id="hanging-icons">
   <h2 class="pb-2 border-bottom">Masters by category</h2>
   <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-    ${categoriesList()}
+    ${categoriesList(data)}
   </div>
 </div>
 `;
@@ -91,10 +93,10 @@ export class PageHome extends PageTemplate {
   `;
   }
 
-  main() {
+  async main() {
     return `
     ${this.signForm()}
-    ${this.mastersCategory()};
+    ${await this.mastersCategory()};
     ${this.viewAll()}`;
   }
 }

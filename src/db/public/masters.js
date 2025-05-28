@@ -60,3 +60,18 @@ export async function getMastersByWorkshop(workshop) {
     return [];
   }
 }
+
+export async function getWorkShops() {
+  try {
+    const sql = `
+             SELECT *
+            FROM workshops
+            `;
+    const [results] = await connection.query(sql);
+
+    return results;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}

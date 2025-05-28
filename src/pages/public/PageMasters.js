@@ -1,5 +1,4 @@
-import { mastersData } from "../../data/masters.js";
-
+import { getAllMasters } from "../../db/public/masters.js";
 import { PageTemplate } from "../../templates/PageTemplate.js";
 
 export class PageMasters extends PageTemplate {
@@ -9,11 +8,13 @@ export class PageMasters extends PageTemplate {
     this.pageJS = "masters-like";
   }
 
-  masters(category) {
+  async masters(category) {
     let html = "";
 
+    const mastersData = await getAllMasters();
+
     for (const master of mastersData) {
-      if (master.slug === category || category === "")
+      if (master.url_slug === category || category === "")
         html += `
       <div class="col">
         <div class="card shadow-sm">
@@ -24,14 +25,14 @@ export class PageMasters extends PageTemplate {
           </div>
           <div class="card-body">
             <h4 class="card-text">${master.name} ${master.lastName}</h4>
-            <p class="card-text">Category: ${master.specialization}</p>
-            <p class="card-text">Workshop: ${master.service}, ${master.city}</p>
-            <p class="card-text">Experience: ${master.experiece}</p>
+            <p class="card-text">Category: ${master.category}</p>
+            <p class="card-text">Workshop: ${master.workshop}, ${master.city}</p>
+            <p class="card-text">Experience: ${master.experience}</p>
 
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="/masters/${master.slug}" class="btn btn-sm btn-outline-secondary">
-                  View all this category masters
+                <a href="/masters/${master.url_slug}" class="btn btn-sm btn-outline-secondary">
+                  View all ${master.category}'s
                 </a>
               </div>
             </div>
@@ -52,7 +53,7 @@ export class PageMasters extends PageTemplate {
     `;
   }
 
-  main() {
+  async main() {
     let category = "";
 
     if (this.req?.params?.category) {
@@ -72,7 +73,7 @@ export class PageMasters extends PageTemplate {
              </div>
          </div>
        </div>
-       ${this.masters(category)};
+       ${await this.masters(category)};
      </main>
     `;
   }
