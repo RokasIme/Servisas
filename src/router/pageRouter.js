@@ -1,11 +1,11 @@
 import express from "express";
-import { PageHome } from "../pages/PageHome.js";
-import { PageLogin } from "../pages/PageLogin.js";
-import { PageRegister } from "../pages/PageRegister.js";
-import { Page404 } from "../pages/Page404.js";
-import { PageMasters } from "../pages/PageMasters.js";
-import { PageLogout } from "../pages/PageLogout.js";
-import { PageWorshops } from "../pages/PageWorkshops.js";
+import { PageHome } from "../pages/public/PageHome.js";
+import { PageLogin } from "../pages/public/PageLogin.js";
+import { PageRegister } from "../pages/public/PageRegister.js";
+import { Page404 } from "../pages/public/Page404.js";
+import { PageMasters } from "../pages/public/PageMasters.js";
+import { PageLogout } from "../pages/public/PageLogout.js";
+import { PageWorshops } from "../pages/public/PageWorkshops.js";
 
 export const pageRouter = express.Router();
 

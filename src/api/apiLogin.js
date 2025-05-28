@@ -1,8 +1,8 @@
-import { usersData } from "../data/users.js";
+import { connection } from "../db.js";
 import { IsValid } from "../lib/isValid.js";
 import { randomString } from "../lib/randomString.js";
 
-export function apiLogin(req, res) {
+export async function apiLogin(req, res) {
   const [err, msg] = IsValid.requiredFields(req.body, [
     { field: "email", validation: IsValid.email },
     { field: "password", validation: IsValid.password },
@@ -15,24 +15,51 @@ export function apiLogin(req, res) {
     });
   }
 
-  let userExists = false;
+  const { email, password } = req.body;
+  let userObj = null;
 
-  for (const user of usersData) {
-    if (user.email === req.body.email && user.password === req.body.password) {
-      userExists = true;
-      break;
+  try {
+    const sql = "SELECT * FROM users WHERE email = ? AND password = ?;";
+    const [result] = await connection.query(sql, [email, password]);
+
+    if (result.length === 0) {
+      return res.json({
+        status: "error",
+        msg: "Neteisinga el pasto ir slaptazodzio kombinacija, arba toks vartotojas neegzistuoja",
+      });
+    } else {
+      userObj = result[0];
     }
-  }
-
-  if (!userExists) {
+  } catch (error) {
+    console.log(error);
     return res.json({
       status: "error",
-      msg: "Neteisinga el pasto ir slaptazodzio kombinacija, arba toks vartotojas neegzistuoja",
+      msg: "Serverio klaida, pabandykite prisijungti veliau",
+    });
+  }
+
+  const loginToken = randomString(20);
+
+  try {
+    const sql = "INSERT INTO tokens (text, user_id) VALUES (?, ?);";
+    const [result] = await connection.query(sql, [loginToken, userObj.id]);
+
+    if (result.affectedRows !== 1) {
+      return res.json({
+        status: "error",
+        msg: "Serverio klaida, pabandykite prisijungti veliau",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      status: "error",
+      msg: "Serverio klaida, pabandykite prisijungti veliau",
     });
   }
 
   const cookie = [
-    "loginToken=" + randomString(20),
+    "loginToken=" + loginToken,
     "domain=localhost",
     "path=/",
     "max-age=3600",
@@ -44,5 +71,6 @@ export function apiLogin(req, res) {
   return res.set("Set-Cookie", cookie.join("; ")).json({
     status: "success",
     msg: "Jus buvote sekmingai prijungti prie sistemos",
+    redirectTo: "/admin",
   });
 }

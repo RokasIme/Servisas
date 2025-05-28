@@ -1,5 +1,5 @@
-import { categoriesList } from "../components/categoriesList.js";
-import { PageTemplate } from "../templates/PageTemplate.js";
+import { categoriesList } from "../../components/categoriesList.js";
+import { PageTemplate } from "../../templates/PageTemplate.js";
 // const homeLoginDOM = document.querySelector(".home-login-section");
 // homeLoginDOM.classList.add("d-none");
 

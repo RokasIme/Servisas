@@ -1,6 +1,6 @@
-import { mastersData } from "../data/masters.js";
-import { workshopsData } from "../data/workshops.js";
-import { PageTemplate } from "../templates/PageTemplate.js";
+import { mastersData } from "../../data/masters.js";
+import { workshopsData } from "../../data/workshops.js";
+import { PageTemplate } from "../../templates/PageTemplate.js";
 
 export class PageWorshops extends PageTemplate {
   constructor(req) {

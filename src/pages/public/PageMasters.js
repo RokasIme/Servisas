@@ -1,5 +1,6 @@
-import { mastersData } from "../data/masters.js";
-import { PageTemplate } from "../templates/PageTemplate.js";
+import { mastersData } from "../../data/masters.js";
+
+import { PageTemplate } from "../../templates/PageTemplate.js";
 
 export class PageMasters extends PageTemplate {
   constructor(req) {

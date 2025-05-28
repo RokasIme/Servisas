@@ -1,7 +1,7 @@
 import express from "express";
 import { pageRouter } from "./router/pageRouter.js";
 import { apiRouter } from "./router/apiRouter.js";
-import { PORT } from "../env.js";
+import { PORT } from "./env.js";
 
 const app = express();
 
