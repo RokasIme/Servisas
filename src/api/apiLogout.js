@@ -1,3 +1,5 @@
+import { connection } from "../db.js";
+
 export async function apiLogout(req, res) {
   if (req.cookies.loginToken) {
     try {

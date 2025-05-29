@@ -14,15 +14,16 @@ export function tableMasters(data) {
     HTML += `
             <tr>
                 <td>${item.id}</td>
-                <td><img style="max-width: 5rem; max-height: 5rem;" src="/img/movie-thumbnails/${item.thumbnail}" alt="Movie thumbnail"></td>
-                <td>${item.title}</td>
+                <td><img style="max-width: 5rem; max-height: 5rem;" src="/img/${item.img}" alt="Movie thumbnail"></td>
+                <td>${item.name}</td>
+                <td>${item.lastName}</td>
                 <td>${item.url_slug}</td>
                 <td>${desc}</td>
-                <td>${item.duration}</td>
+                <td>${item.experience}</td>
                 <td>${status}</td>
                 <td>
                     <div style="display: flex; gap: 0.3rem;">
-                        <a class="btn btn-primary" href="/admin/categories/${item.url_slug}/edit">Edit</a>
+                        <a class="btn btn-primary" href="/admin/masters/${item.url_slug}/edit">Edit</a>
                         <button class="btn btn-danger" type="button">Delete</button>
                     </div>
                 </td>
@@ -36,10 +37,11 @@ export function tableMasters(data) {
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Thumbnail</th>
-                        <th scope="col">Title</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">LastName</th>
                         <th scope="col">Url</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Duration</th>
+                        <th scope="col">Experience</th>
                         <th scope="col">Status</th>
                         <th scope="col">Actions</th>
                     </tr>

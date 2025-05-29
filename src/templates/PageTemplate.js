@@ -85,8 +85,6 @@ export class PageTemplate {
   }
 
   async render() {
-    console.log(this.isPublicPage);
-
     return `
     <!DOCTYPE html>
     <html lang="en">

@@ -53,22 +53,22 @@ export class AdminPageTemplate extends PageTemplate {
                         </h6>
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/movies/new">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/masters/new">
                                     Add new
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/movies">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/masters">
                                     All masters
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/movies/published">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/masters/published">
                                     Published masters
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/movies/draft">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/masters/draft">
                                     Draft masters
                                 </a>
                             </li>
@@ -79,12 +79,12 @@ export class AdminPageTemplate extends PageTemplate {
                         </h6>
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/movies/new">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/workshop/new">
                                     Add new
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/movies">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/workshops">
                                     All workshops
                                 </a>
                             </li>
