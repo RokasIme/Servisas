@@ -3,6 +3,7 @@ export class PageTemplate {
     this.req = req;
     this.activeMenuIndex = -1;
     this.pageJS = "";
+    this.isPublicPage = true;
   }
 
   head() {
@@ -25,8 +26,6 @@ export class PageTemplate {
   }
 
   header() {
-    const userIsLoggedIn = this.req.headers.cookie !== undefined;
-
     const publicMenu = [
       { href: "/", text: "Home" },
       { href: "/masters", text: "Masters" },
@@ -39,13 +38,12 @@ export class PageTemplate {
     ];
 
     const userMenu = [
-      { href: "/new-service", text: "New Service" },
-      { href: "/edit-service", text: "Edit Service" },
-      { href: "/edit-master", text: "Edit Master" },
-      { href: "/dashboard", text: "Dashboard" },
+      { href: "/admin", text: "Dashboard" },
       { href: "/logout", text: "Logout" },
     ];
-    const menu = publicMenu.concat(userIsLoggedIn ? userMenu : authMenu);
+    const menu = publicMenu.concat(
+      this.req.user.isLoggedIn ? userMenu : authMenu
+    );
 
     let menuHTML = "";
 
@@ -61,7 +59,7 @@ export class PageTemplate {
     }
 
     return ` 
-  <div class="container">
+  <div class="container${this.isPublicPage ? "" : "-fluid"}">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <img class="bi me-2 ms-2" width="40" height="32" src="/img/home.jfif" alt="Home">
@@ -87,6 +85,8 @@ export class PageTemplate {
   }
 
   async render() {
+    console.log(this.isPublicPage);
+
     return `
     <!DOCTYPE html>
     <html lang="en">

@@ -6,6 +6,8 @@ import { Page404 } from "../pages/public/Page404.js";
 import { PageMasters } from "../pages/public/PageMasters.js";
 import { PageLogout } from "../pages/public/PageLogout.js";
 import { PageWorshops } from "../pages/public/PageWorkshops.js";
+import { isAdmin } from "../middleware/isAdmin.js";
+import { adminRouter } from "./adminRouter.js";
 
 export const pageRouter = express.Router();
 
@@ -30,6 +32,8 @@ pageRouter.get("/workshops", async (req, res) =>
 pageRouter.get("/logout", async (req, res) =>
   res.send(await new PageLogout(req).render())
 );
+
+pageRouter.use("/admin", isAdmin, adminRouter);
 
 pageRouter.get("*error", async (req, res) =>
   res.send(await new Page404(req).render())
