@@ -8,6 +8,8 @@ import { PageAdminCategoriesPublished } from "../pages/admin/PageCategoriesPubli
 import { PageAdminCategoriesDraft } from "../pages/admin/PageCategoriesDraft.js";
 import { PageAdminWorkshops } from "../pages/admin/PageWorkshopsAll.js";
 import { PageAdminCategoryNew } from "../pages/admin/PageCategoryNew.js";
+import { PageAdminWorkshopNew } from "../pages/admin/PageWorkshopNew.js";
+import { PageAdminMastersNew } from "../pages/admin/PageMastersNew.js";
 
 export const adminRouter = express.Router();
 
@@ -23,6 +25,9 @@ adminRouter.get("/masters/published", async (req, res) =>
 );
 adminRouter.get("/masters/draft", async (req, res) =>
   res.send(await new PageAdminMastersDraft(req).render())
+);
+adminRouter.get("/masters/new", async (req, res) =>
+  res.send(await new PageAdminMastersNew(req).render())
 );
 
 adminRouter.get("/categories", async (req, res) =>
@@ -40,4 +45,7 @@ adminRouter.get("/categories/new", async (req, res) =>
 
 adminRouter.get("/workshops", async (req, res) =>
   res.send(await new PageAdminWorkshops(req).render())
+);
+adminRouter.get("/workshop/new", async (req, res) =>
+  res.send(await new PageAdminWorkshopNew(req).render())
 );

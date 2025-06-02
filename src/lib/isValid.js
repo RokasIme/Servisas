@@ -21,8 +21,8 @@ export class IsValid {
       return [true, "Reikalingi laukai yra: " + names];
     }
 
-    for (const { field, validation } of requiredFields) {
-      const [err, msg] = validation(clientData[field]);
+    for (const { field, validation, options } of requiredFields) {
+      const [err, msg] = validation(clientData[field], options);
 
       if (err) {
         return [err, msg];
@@ -216,6 +216,53 @@ export class IsValid {
       number > Number.MAX_SAFE_INTEGER
     ) {
       return [true, "ID turi buti teigiamas sveikasis skaiciaus."];
+    }
+
+    return [false, "Ok"];
+  }
+
+  static nonEmptyString(text) {
+    text = text.trim();
+
+    if (typeof text !== "string" || text === "") {
+      return [true, "Turi buti ne tuscias tekstas."];
+    }
+
+    return [false, "Ok"];
+  }
+
+  static urlSlug(text) {
+    if (typeof text !== "string" || text === "") {
+      return [true, "Turi buti ne tuscias tekstas."];
+    }
+
+    const allowedSymbols =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-";
+    const errors = [];
+
+    for (const s of text) {
+      if (!allowedSymbols.includes(s) && !errors.includes(`"${s}"`)) {
+        errors.push(`"${s}"`);
+      }
+    }
+
+    if (errors.length) {
+      return [true, `Rasti neleistini simboliai: ${errors.join(", ")}.`];
+    }
+
+    return [false, "Ok"];
+  }
+
+  static includesInList(text, allowedValues) {
+    if (
+      typeof text !== "string" ||
+      text === "" ||
+      !allowedValues.includes(text)
+    ) {
+      return [
+        true,
+        `Turi buti tinkamas statusas: ${allowedValues.join(", ")}.`,
+      ];
     }
 
     return [false, "Ok"];
