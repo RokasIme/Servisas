@@ -14,7 +14,7 @@ export function tableMasters(data) {
     HTML += `
             <tr>
                 <td>${item.id}</td>
-                <td><img style="max-width: 5rem; max-height: 5rem;" src="/img/${item.img}" alt="Movie thumbnail"></td>
+                <td><img style="max-width: 5rem; max-height: 5rem;" src="/img/${item.img}" alt="Master thumbnail"></td>
                 <td>${item.name}</td>
                 <td>${item.lastName}</td>
                 <td>${item.url_slug}</td>

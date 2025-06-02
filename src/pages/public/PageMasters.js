@@ -1,3 +1,4 @@
+import { getAllLikes } from "../../db/admin/likes.js";
 import { getAllMasters } from "../../db/public/masters.js";
 import { PageTemplate } from "../../templates/PageTemplate.js";
 
@@ -14,14 +15,18 @@ export class PageMasters extends PageTemplate {
     const mastersData = await getAllMasters();
 
     for (const master of mastersData) {
+      const likes = await getAllLikes(master.id);
+
+      console.log(likes);
+
       if (master.url_slug === category || category === "")
         html += `
       <div class="col">
         <div class="card shadow-sm">
           <div class="photo">
             <img class="bd-placeholder-img card-img-top" src="/img/${master.img}" alt="Photo" />
-            <div class="like-count">0</div>
-            <i class="click-heart fa fa-heart" aria-hidden="true"></i>
+            <div data-count="${master.id}" class="like-count">${likes}</div>
+            <i data-push="${master.id}" class="click-heart fa fa-heart" aria-hidden="true"></i>
           </div>
           <div class="card-body">
             <h4 class="card-text">${master.name} ${master.lastName}</h4>
