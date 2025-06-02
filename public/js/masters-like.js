@@ -4,10 +4,9 @@ const heartClickDOM = document.querySelectorAll(".click-heart");
 for (let i = 0; i < heartClickDOM.length; i++) {
   heartClickDOM[i].addEventListener("click", (event) => {
     event.preventDefault();
-    countDOM[i].innerText++;
 
     const data = {
-      likes: countDOM[i].innerText,
+      likes: "1",
       masterId: heartClickDOM[i].dataset.push,
     };
 
@@ -23,5 +22,6 @@ for (let i = 0; i < heartClickDOM.length; i++) {
         console.log(data);
       })
       .catch((err) => console.log(err));
+    location.reload();
   });
 }

@@ -15,9 +15,9 @@ export class PageMasters extends PageTemplate {
     const mastersData = await getAllMasters();
 
     for (const master of mastersData) {
-      const likes = await getAllLikes(master.id);
-
-      console.log(likes);
+      const likesObj = await getAllLikes(master.id);
+      let likes = likesObj[0].sum;
+      likes === null ? (likes = 0) : likes;
 
       if (master.url_slug === category || category === "")
         html += `
