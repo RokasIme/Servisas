@@ -12,6 +12,8 @@ export class PageMasters extends PageTemplate {
   async masters(category) {
     let html = "";
 
+    // console.log(this.req.headers.cookie);
+
     const mastersData = await getAllMasters();
 
     for (const master of mastersData) {

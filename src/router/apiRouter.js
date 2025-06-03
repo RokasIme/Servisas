@@ -17,4 +17,4 @@ apiRouter.get("/api/logout", apiLogout);
 apiRouter.post("/api/admin/categories", isAdminAPI, apiCategoriesPost);
 apiRouter.post("/api/admin/workshops", isAdminAPI, apiWorkshopsPost);
 
-apiRouter.post("/api/likes/:id", apiLikesPost);
+apiRouter.post("/api/likes/:id", isAdminAPI, apiLikesPost);

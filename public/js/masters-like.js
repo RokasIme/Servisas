@@ -5,6 +5,8 @@ for (let i = 0; i < heartClickDOM.length; i++) {
   heartClickDOM[i].addEventListener("click", (event) => {
     event.preventDefault();
 
+    // heartClickDOM[i].style.color = "red";
+
     const data = {
       likes: "1",
       masterId: heartClickDOM[i].dataset.push,

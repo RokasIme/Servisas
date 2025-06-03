@@ -4,10 +4,40 @@ export async function apiLikesPost(req, res) {
   const id = +req.params.id;
 
   const { likes, masterId } = req.body;
+  const userId = req.user.id;
 
   try {
-    const sql = "INSERT INTO likes (like_count, master_id) VALUES (?, ?);";
-    const [result] = await connection.query(sql, [likes, masterId]);
+    const sql = `
+    SELECT *, 
+      SUM(like_count) AS sum 
+    FROM likes
+    WHERE user_id = ?
+    GROUP BY master_id
+    HAVING master_id = ?;`;
+    const [result] = await connection.query(sql, [userId, masterId]);
+
+    // reikalingas patobulinimas, pirmą kart likiniant meta undefined nes dar nėra sumos
+    let sum;
+    result[0].sum === undefined ? (sum = 0) : (sum = result[0].sum);
+
+    if (sum === "1") {
+      return res.json({
+        status: "error",
+        msg: "Šis vartotjas meistrui like jau uždėjo",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    const sql =
+      "INSERT INTO likes (like_count, master_id, user_id) VALUES (?, ?, ?);";
+    const [result] = await connection.query(sql, [
+      likes,
+      masterId,
+      req.user.id,
+    ]);
 
     if (result.affectedRows !== 1) {
       return res.json({
