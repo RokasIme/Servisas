@@ -16,11 +16,9 @@ export async function apiLikesPost(req, res) {
     HAVING master_id = ?;`;
     const [result] = await connection.query(sql, [userId, masterId]);
 
-    // reikalingas patobulinimas, pirmą kart likiniant meta undefined nes dar nėra sumos
-    let sum;
-    result[0].sum === undefined ? (sum = 0) : (sum = result[0].sum);
+    const sum = +result[0]?.sum ?? 0;
 
-    if (sum === "1") {
+    if (sum > 0) {
       return res.json({
         status: "error",
         msg: "Šis vartotjas meistrui like jau uždėjo",
@@ -28,6 +26,7 @@ export async function apiLikesPost(req, res) {
     }
   } catch (error) {
     console.log(error);
+    return;
   }
 
   try {

@@ -5,10 +5,8 @@ for (let i = 0; i < heartClickDOM.length; i++) {
   heartClickDOM[i].addEventListener("click", (event) => {
     event.preventDefault();
 
-    // heartClickDOM[i].style.color = "red";
-
     const data = {
-      likes: "1",
+      likes: 1,
       masterId: heartClickDOM[i].dataset.push,
     };
 
@@ -22,8 +20,9 @@ for (let i = 0; i < heartClickDOM.length; i++) {
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
+        heartClickDOM[i].style.color = "red";
+        countDOM[i].innerText = +countDOM[i].innerText + 1;
       })
       .catch((err) => console.log(err));
-    location.reload();
   });
 }
