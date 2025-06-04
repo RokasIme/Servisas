@@ -1,5 +1,5 @@
 import { connection } from "../../db.js";
-import { IsValid } from "../../lib/isValid.js";
+import { IsValid } from "../../lib/IsValid.js";
 
 export async function apiWorkshopsPost(req, res) {
   const [err, msg] = IsValid.requiredFields(req.body, [

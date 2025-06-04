@@ -18,10 +18,18 @@ export async function apiLikesPost(req, res) {
 
     const sum = +result[0]?.sum ?? 0;
 
+    // if (sum === 1) {
+    //   likes = -1;
+    //   res.json({
+    //     status: "error",
+    //     msg: "Šis vartotjas meistrui like jau uždėjo, nuimama",
+    //   });
+    // }
+
     if (sum > 0) {
       return res.json({
         status: "error",
-        msg: "Šis vartotjas meistrui like jau uždėjo",
+        msg: "Šis vartotjas meistrui negali uždėti daugiau nei vieną like",
       });
     }
   } catch (error) {

@@ -1,5 +1,5 @@
 import { connection } from "../../db.js";
-import { IsValid } from "../../lib/isValid.js";
+import { IsValid } from "../../lib/IsValid.js";
 
 export async function apiCategoriesPost(req, res) {
   const [err, msg] = IsValid.requiredFields(req.body, [
@@ -29,7 +29,7 @@ export async function apiCategoriesPost(req, res) {
     if (result.length > 0) {
       return res.json({
         status: "error",
-        msg: "Tokia filmu kategorija jau egzistuoja.",
+        msg: "Tokia serviso meistro kategorija jau egzistuoja.",
       });
     }
   } catch (error) {
@@ -66,6 +66,6 @@ export async function apiCategoriesPost(req, res) {
 
   return res.json({
     status: "success",
-    msg: "Sukurta nauja filmu kategorija",
+    msg: "Sukurta nauja serviso meistrų kategorija",
   });
 }

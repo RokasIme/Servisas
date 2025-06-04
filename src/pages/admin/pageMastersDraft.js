@@ -6,6 +6,7 @@ export class PageAdminMastersDraft extends AdminPageTemplate {
   constructor(req) {
     super(req);
     this.activeMenuIndex = this.req.user.isLoggedIn ? 3 : -1;
+    this.pageJS = "admin-master-delete";
   }
 
   async main() {
@@ -13,7 +14,7 @@ export class PageAdminMastersDraft extends AdminPageTemplate {
 
     return `
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h1 class="h2">All masters</h1>
+                <h1 class="h2">Draft masters</h1>
                 ${tableMasters(data)}
             </main>`;
   }

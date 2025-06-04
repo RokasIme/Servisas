@@ -6,7 +6,7 @@ export class PageAdminWorkshops extends AdminPageTemplate {
   constructor(req) {
     super(req);
     this.activeMenuIndex = this.req.user.isLoggedIn ? 3 : -1;
-    // this.pageJS = "admin-category-delete";
+    this.pageJS = "admin-workshop-delete";
   }
 
   async main() {

@@ -32,9 +32,9 @@ export class PageMasters extends PageTemplate {
               master.img
             }" alt="Photo" />
             <div data-count="${master.id}" class="like-count">${likes}</div>
-            <i data-push="${master.id}" ${
-          like === 1 ? "style='color: red'" : ""
-        }class="click-heart fa fa-heart" aria-hidden="true"></i>
+            <i data-push="${master.id}" class=" ${
+          like === 1 ? "heart-color" : ""
+        } click-heart fa fa-heart" aria-hidden="true"></i>
           </div>
           <div class="card-body">
             <h4 class="card-text">${master.name} ${master.lastName}</h4>

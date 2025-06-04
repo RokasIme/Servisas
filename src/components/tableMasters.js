@@ -24,7 +24,7 @@ export function tableMasters(data) {
                 <td>
                     <div style="display: flex; gap: 0.3rem;">
                         <a class="btn btn-primary" href="/admin/masters/${item.url_slug}/edit">Edit</a>
-                        <button class="btn btn-danger" type="button">Delete</button>
+                        <button data-id="${item.id}" class="btn btn-danger" type="button">Delete</button>
                     </div>
                 </td>
             </tr>`;

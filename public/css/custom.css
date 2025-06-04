@@ -9,7 +9,7 @@
   height: 225px;
 }
 
-.photo i {
+.click-heart {
   position: absolute;
   top: 30px;
   right: 10px;
@@ -25,4 +25,8 @@
   top: 8px;
   right: 15px;
   color: #fff;
+}
+
+.heart-color {
+  color: red;
 }

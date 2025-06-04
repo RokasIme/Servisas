@@ -1,5 +1,5 @@
 import { connection } from "../db.js";
-import { IsValid } from "../lib/isValid.js";
+import { IsValid } from "../lib/IsValid.js";
 import { randomString } from "../lib/randomString.js";
 
 export async function apiLogin(req, res) {

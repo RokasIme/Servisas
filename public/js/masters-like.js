@@ -5,11 +5,14 @@ for (let i = 0; i < heartClickDOM.length; i++) {
   heartClickDOM[i].addEventListener("click", (event) => {
     event.preventDefault();
 
+    // kaip padaryti kad matytų kai jau palaikinta ir priskirtų likes reikšmę -1
     const data = {
       likes: 1,
       masterId: heartClickDOM[i].dataset.push,
     };
 
+    // ar galima rašyt du fetch'us šitam event listenery
+    // fetch("/api/dislikes/" + heartClickDOM[i].dataset.push,
     fetch("/api/likes/" + heartClickDOM[i].dataset.push, {
       method: "POST",
       headers: {
@@ -20,7 +23,9 @@ for (let i = 0; i < heartClickDOM.length; i++) {
       .then((data) => data.json())
       .then((data) => {
         console.log(data);
-        heartClickDOM[i].style.color = "red";
+        heartClickDOM[i].classList.toggle("heart-color");
+
+        // kaip padaryti kad matytų kai jau palaikinta ir priskirtų likes reikšmę -1
         countDOM[i].innerText = +countDOM[i].innerText + 1;
       })
       .catch((err) => console.log(err));

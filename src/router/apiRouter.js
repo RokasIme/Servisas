@@ -6,6 +6,9 @@ import { isAdminAPI } from "../middleware/isAdminApi.js";
 import { apiCategoriesPost } from "../api/admin/apiCategoriesPost.js";
 import { apiWorkshopsPost } from "../api/admin/apiWorkshopsPost.js";
 import { apiLikesPost } from "../api/apiLikes.js";
+import { apiCategoriesDelete } from "../api/admin/apiCategoriesDelete.js";
+import { apiWorkshopDelete } from "../api/admin/apiWorkshopDelete.js";
+import { apiMasterDelete } from "../api/admin/apiMasterDelete.js";
 
 export const apiRouter = express.Router();
 
@@ -15,6 +18,11 @@ apiRouter.post("/api/", apiLogin);
 apiRouter.get("/api/logout", apiLogout);
 
 apiRouter.post("/api/admin/categories", isAdminAPI, apiCategoriesPost);
+apiRouter.delete("/api/admin/categories/:id", isAdminAPI, apiCategoriesDelete);
+
+apiRouter.delete("/api/admin/master/:id", isAdminAPI, apiMasterDelete);
+
 apiRouter.post("/api/admin/workshops", isAdminAPI, apiWorkshopsPost);
+apiRouter.delete("/api/admin/workshop/:id", isAdminAPI, apiWorkshopDelete);
 
 apiRouter.post("/api/likes/:id", isAdminAPI, apiLikesPost);
