@@ -9,6 +9,7 @@ import { apiLikesPost } from "../api/apiLikes.js";
 import { apiCategoriesDelete } from "../api/admin/apiCategoriesDelete.js";
 import { apiWorkshopDelete } from "../api/admin/apiWorkshopDelete.js";
 import { apiMasterDelete } from "../api/admin/apiMasterDelete.js";
+import { apiUnLikePost } from "../api/apiUnLike.js";
 
 export const apiRouter = express.Router();
 
@@ -25,4 +26,5 @@ apiRouter.delete("/api/admin/master/:id", isAdminAPI, apiMasterDelete);
 apiRouter.post("/api/admin/workshops", isAdminAPI, apiWorkshopsPost);
 apiRouter.delete("/api/admin/workshop/:id", isAdminAPI, apiWorkshopDelete);
 
-apiRouter.post("/api/likes/:id", isAdminAPI, apiLikesPost);
+apiRouter.post("/api/like/:id", isAdminAPI, apiLikesPost);
+apiRouter.post("/api/unlike/:id", isAdminAPI, apiUnLikePost);

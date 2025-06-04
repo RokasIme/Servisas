@@ -1,6 +1,6 @@
 import { connection } from "../db.js";
 
-export async function apiLikesPost(req, res) {
+export async function apiUnLikePost(req, res) {
   // const id = +req.params.id;
 
   const { masterId } = req.body;
@@ -18,10 +18,10 @@ export async function apiLikesPost(req, res) {
 
     const sum = +result[0]?.sum ?? 0;
 
-    if (sum > 0) {
+    if (sum !== 1) {
       return res.json({
         status: "error",
-        msg: "Šis vartotjas meistrui negali uždėti daugiau nei vieną like",
+        msg: "Šis vartotjas meistrui negali nuimti like",
       });
     }
   } catch (error) {
@@ -32,7 +32,7 @@ export async function apiLikesPost(req, res) {
   try {
     const sql =
       "INSERT INTO likes (like_count, master_id, user_id) VALUES (?, ?, ?);";
-    const [result] = await connection.query(sql, [1, masterId, userId]);
+    const [result] = await connection.query(sql, [-1, masterId, userId]);
 
     if (result.affectedRows !== 1) {
       return res.json({
@@ -50,6 +50,6 @@ export async function apiLikesPost(req, res) {
 
   return res.json({
     status: "success",
-    msg: "Sukurta nauja like eilutė",
+    msg: "Sukurta nauja unlike eilutė",
   });
 }

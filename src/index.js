@@ -19,3 +19,5 @@ app.use("/", pageRouter);
 app.listen(PORT, () => {
   console.log(`Serveris: http://localhost:${PORT}`);
 });
+
+// kai pakeiti foto kad išsitrintų senoji.
