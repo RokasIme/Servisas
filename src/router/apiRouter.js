@@ -11,6 +11,7 @@ import { apiWorkshopDelete } from "../api/admin/apiWorkshopDelete.js";
 import { apiMasterDelete } from "../api/admin/apiMasterDelete.js";
 import { apiUnLikePost } from "../api/apiUnLike.js";
 import { apiCategoriesPut } from "../api/admin/apiCategoriesPut.js";
+import { apiWorkshopPut } from "../api/admin/apiWorkshopPut.js";
 
 export const apiRouter = express.Router();
 
@@ -26,6 +27,7 @@ apiRouter.delete("/api/admin/categories/:id", isAdminAPI, apiCategoriesDelete);
 apiRouter.delete("/api/admin/master/:id", isAdminAPI, apiMasterDelete);
 
 apiRouter.post("/api/admin/workshops", isAdminAPI, apiWorkshopsPost);
+apiRouter.put("/api/admin/workshops/:id", isAdminAPI, apiWorkshopPut);
 apiRouter.delete("/api/admin/workshop/:id", isAdminAPI, apiWorkshopDelete);
 
 apiRouter.post("/api/like/:id", isAdminAPI, apiLikesPost);
