@@ -6,7 +6,7 @@ export class PageMasters extends PageTemplate {
   constructor(req) {
     super(req);
     this.activeMenuIndex = 1;
-    this.pageJS = "masters-like";
+    this.pageJS = this.req.user.id ? "masters-like" : "";
   }
 
   async masters(category) {

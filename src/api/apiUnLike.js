@@ -1,9 +1,7 @@
 import { connection } from "../db.js";
 
 export async function apiUnLikePost(req, res) {
-  // const id = +req.params.id;
-
-  const { masterId } = req.body;
+  const masterId = +req.params.id;
   const userId = req.user.id;
 
   try {

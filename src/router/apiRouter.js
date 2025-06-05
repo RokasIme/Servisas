@@ -1,7 +1,7 @@
 import express from "express";
-import { apiRegister } from "../api/apiRegister.js";
-import { apiLogin } from "../api/apiLogin.js";
-import { apiLogout } from "../api/apiLogout.js";
+import { apiRegister } from "../api/public/apiRegister.js";
+import { apiLogin } from "../api/public/apiLogin.js";
+import { apiLogout } from "../api/public/apiLogout.js";
 import { isAdminAPI } from "../middleware/isAdminApi.js";
 import { apiCategoriesPost } from "../api/admin/apiCategoriesPost.js";
 import { apiWorkshopsPost } from "../api/admin/apiWorkshopsPost.js";
