@@ -1,8 +1,27 @@
 import { connection } from "../db.js";
+import { IsValid } from "../lib/IsValid.js";
 
 export async function apiLikesPost(req, res) {
   const masterId = +req.params.id;
   const userId = req.user.id;
+
+  const [errId, msgId] = IsValid.id(masterId);
+
+  if (errId) {
+    return res.json({
+      status: "error",
+      msg: msgId,
+    });
+  }
+
+  const [errUserId, msgUserId] = IsValid.id(userId);
+
+  if (errUserId) {
+    return res.json({
+      status: "error",
+      msg: msgUserId,
+    });
+  }
 
   try {
     const sql = `

@@ -10,6 +10,7 @@ import { PageAdminWorkshops } from "../pages/admin/PageWorkshopsAll.js";
 import { PageAdminCategoryNew } from "../pages/admin/PageCategoryNew.js";
 import { PageAdminWorkshopNew } from "../pages/admin/PageWorkshopNew.js";
 import { PageAdminMastersNew } from "../pages/admin/PageMastersNew.js";
+import { PageAdminCategoryEdit } from "../pages/admin/PageCategoryEdit.js";
 
 export const adminRouter = express.Router();
 
@@ -41,6 +42,9 @@ adminRouter.get("/categories/draft", async (req, res) =>
 );
 adminRouter.get("/categories/new", async (req, res) =>
   res.send(await new PageAdminCategoryNew(req).render())
+);
+adminRouter.get("/categories/:urlSlug/edit", async (req, res) =>
+  res.send(await new PageAdminCategoryEdit(req).render())
 );
 
 adminRouter.get("/workshops", async (req, res) =>
