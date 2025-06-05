@@ -12,6 +12,9 @@ import { apiMasterDelete } from "../api/admin/apiMasterDelete.js";
 import { apiUnLikePost } from "../api/apiUnLike.js";
 import { apiCategoriesPut } from "../api/admin/apiCategoriesPut.js";
 import { apiWorkshopPut } from "../api/admin/apiWorkshopPut.js";
+import { uploadMasterImage } from "../middleware/uploadThumbnail.js";
+import { apiUpload } from "../api/admin/apiUpload.js";
+import { apiMastersPost } from "../api/admin/apiMastersPost.js";
 
 export const apiRouter = express.Router();
 
@@ -25,6 +28,7 @@ apiRouter.put("/api/admin/categories/:id", isAdminAPI, apiCategoriesPut);
 apiRouter.delete("/api/admin/categories/:id", isAdminAPI, apiCategoriesDelete);
 
 apiRouter.delete("/api/admin/master/:id", isAdminAPI, apiMasterDelete);
+apiRouter.post("/api/admin/masters", isAdminAPI, apiMastersPost);
 
 apiRouter.post("/api/admin/workshops", isAdminAPI, apiWorkshopsPost);
 apiRouter.put("/api/admin/workshops/:id", isAdminAPI, apiWorkshopPut);
@@ -32,3 +36,10 @@ apiRouter.delete("/api/admin/workshop/:id", isAdminAPI, apiWorkshopDelete);
 
 apiRouter.post("/api/like/:id", isAdminAPI, apiLikesPost);
 apiRouter.post("/api/unlike/:id", isAdminAPI, apiUnLikePost);
+
+apiRouter.post(
+  "/api/admin/upload",
+  isAdminAPI,
+  uploadMasterImage.single("thumbnail"),
+  apiUpload
+);
