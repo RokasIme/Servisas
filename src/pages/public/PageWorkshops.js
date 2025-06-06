@@ -1,5 +1,6 @@
 import { PageTemplate } from "../../templates/PageTemplate.js";
 import { getWorkShops, getMastersByWorkshop } from "../../db/public/masters.js";
+import { getAllLikes, getHeartColor } from "../../db/admin/likes.js";
 
 export class PageWorshops extends PageTemplate {
   constructor(req) {
@@ -34,23 +35,41 @@ export class PageWorshops extends PageTemplate {
       );
 
       for (const master of mastersByWorkshop) {
+        const likesObj = await getAllLikes(master.id);
+        let likes = likesObj[0].sum;
+        likes === null ? (likes = 0) : likes;
+
+        const user_id = this.req.user.id;
+        const result = await getHeartColor(user_id, master.id);
+        const like = +result[0]?.sum ? +result[0].sum : 0;
+
         html += `
             <div class="col">
               <div class="card shadow-sm">
                 <div class="photo">
-                  <img class="bd-placeholder-img card-img-top" src="/img/${master.img}" alt="Photo" />
-                  <div class="like-count">0</div>
-                  <i class="click-heart fa fa-heart" aria-hidden="true"></i>
+                  <img class="bd-placeholder-img card-img-top" src="/img/${
+                    master.img
+                  }" alt="Photo" />
+                  <div data-count="${
+                    master.id
+                  }" class="like-count">${likes}</div>
+                  <i data-push="${master.id}" class=" ${
+          like === 1 ? "heart-color" : ""
+        } click-heart fa fa-heart" aria-hidden="true"></i>
                 </div>
                 <div class="card-body">
                   <h4 class="card-text">${master.name} ${master.lastName}</h4>
                   <p class="card-text">Category: ${master.category}</p>
-                  <p class="card-text">Workshop: ${master.workshop}, ${master.city}</p>
+                  <p class="card-text">Workshop: ${master.workshop}, ${
+          master.city
+        }</p>
                   <p class="card-text">Experience: ${master.experience}</p>
       
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="/masters/${master.url_slug}" class="btn btn-sm btn-outline-secondary">
+                      <a href="/masters/${
+                        master.url_slug
+                      }" class="btn btn-sm btn-outline-secondary">
                         View all ${master.category}'s
                       </a>
                     </div>

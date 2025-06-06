@@ -12,6 +12,7 @@ import { PageAdminWorkshopNew } from "../pages/admin/PageWorkshopNew.js";
 import { PageAdminMastersNew } from "../pages/admin/PageMastersNew.js";
 import { PageAdminCategoryEdit } from "../pages/admin/PageCategoryEdit.js";
 import { PageAdminWorkshopEdit } from "../pages/admin/PageWorkshopEdit.js";
+import { PageAdminMasterEdit } from "../pages/admin/PageMasterEdit.js";
 
 export const adminRouter = express.Router();
 
@@ -30,6 +31,9 @@ adminRouter.get("/masters/draft", async (req, res) =>
 );
 adminRouter.get("/masters/new", async (req, res) =>
   res.send(await new PageAdminMastersNew(req).render())
+);
+adminRouter.get("/masters/:id/edit", async (req, res) =>
+  res.send(await new PageAdminMasterEdit(req).render())
 );
 
 adminRouter.get("/categories", async (req, res) =>

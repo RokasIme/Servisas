@@ -61,3 +61,23 @@ export async function getAllMastersPublished() {
     return [];
   }
 }
+
+export async function getMasterById(id) {
+  try {
+    const sql = `
+        SELECT masters.*, categories.category, categories.description, categories.url_slug, workshops.workshop, city
+        FROM masters
+        INNER JOIN categories
+        ON masters.category_id = categories.id
+        INNER JOIN workshops
+        ON masters.workshop_id = workshops.id 
+        WHERE masters.id = ${id}`;
+
+    const [results] = await connection.query(sql);
+
+    return results.length ? results[0] : null;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
