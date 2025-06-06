@@ -6,7 +6,7 @@ export async function getAllLikes(id) {
             SELECT SUM(like_count) AS sum
             FROM likes
             WHERE master_id = ?;`;
-    const [result] = await connection.execute(sql, [id]);
+    const [result] = await connection.query(sql, [id]);
     return result;
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ FROM likes
 WHERE user_id = ?
 GROUP BY master_id
 HAVING master_id = ?;`;
-    const [result] = await connection.execute(sql, [user_id, master_id]);
+    const [result] = await connection.query(sql, [user_id, master_id]);
     return result;
   } catch (error) {
     console.log(error);

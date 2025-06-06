@@ -14,7 +14,7 @@ export async function apiCategoriesDelete(req, res) {
 
   try {
     const sql = "DELETE FROM categories WHERE id = ?;";
-    const [result] = await connection.execute(sql, [id]);
+    const [result] = await (sql, [id]);
 
     if (result.affectedRows !== 1) {
       return res.json({

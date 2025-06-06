@@ -24,7 +24,7 @@ export async function apiCategoriesPost(req, res) {
 
   try {
     const sql = "SELECT * FROM categories WHERE category = ? OR url_slug = ?;";
-    const [result] = await connection.execute(sql, [name, url]);
+    const [result] = await connection.query(sql, [name, url]);
 
     if (result.length > 0) {
       return res.json({
@@ -43,7 +43,7 @@ export async function apiCategoriesPost(req, res) {
   try {
     const sql =
       "INSERT INTO categories (category, url_slug, description, is_published) VALUES (?, ?, ?, ?);";
-    const [result] = await connection.execute(sql, [
+    const [result] = await connection.query(sql, [
       name,
       url,
       description,

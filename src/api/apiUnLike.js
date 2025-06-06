@@ -12,7 +12,7 @@ export async function apiUnLikePost(req, res) {
     WHERE user_id = ?
     GROUP BY master_id
     HAVING master_id = ?;`;
-    const [result] = await connection.execute(sql, [userId, masterId]);
+    const [result] = await connection.query(sql, [userId, masterId]);
 
     const sum = +result[0]?.sum ?? 0;
 

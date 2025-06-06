@@ -46,7 +46,7 @@ export async function apiMastersPost(req, res) {
 
   try {
     const sql = "SELECT * FROM masters WHERE name = ? OR lastName = ?;";
-    const [result] = await connection.execute(sql, [name, lastName]);
+    const [result] = await connection.query(sql, [name, lastName]);
 
     if (result.length > 0) {
       return res.json({
@@ -67,7 +67,7 @@ export async function apiMastersPost(req, res) {
             INSERT INTO masters 
                 (name, lastName, img, category_id, experience, workshop_id , is_published)
             VALUES (?, ?, ?, ?, ?, ?, ?);`;
-    const [result] = await connection.execute(sql, [
+    const [result] = await connection.query(sql, [
       name,
       lastName,
       imageFileName,

@@ -20,7 +20,7 @@ export async function apiRegister(req, res) {
     const sql = `
     SELECT * FROM users
     WHERE email = ?;`;
-    const [result] = await connection.execute(sql, [email]);
+    const [result] = await connection.query(sql, [email]);
 
     if (result.length > 0) {
       return res.json({
@@ -38,7 +38,7 @@ export async function apiRegister(req, res) {
       (email, password)
     VALUES
       (?, ?);`;
-    const [result] = await connection.execute(sql, [email, password]);
+    const [result] = await connection.query(sql, [email, password]);
   } catch (error) {
     console.log(error);
   }

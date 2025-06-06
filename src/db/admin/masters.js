@@ -11,7 +11,7 @@ export async function getAllMasters() {
         ON masters.workshop_id = workshops.id 
         ORDER BY id`;
 
-    const [results] = await connection.execute(sql);
+    const [results] = await connection.query(sql);
 
     return results;
   } catch (error) {
@@ -32,7 +32,7 @@ export async function getAllMastersDaft() {
         WHERE masters.is_published = 0
         ORDER BY id`;
 
-    const [results] = await connection.execute(sql);
+    const [results] = await connection.query(sql);
 
     return results;
   } catch (error) {
@@ -53,7 +53,7 @@ export async function getAllMastersPublished() {
         WHERE masters.is_published = 1
         ORDER BY id`;
 
-    const [results] = await connection.execute(sql);
+    const [results] = await connection.query(sql);
 
     return results;
   } catch (error) {

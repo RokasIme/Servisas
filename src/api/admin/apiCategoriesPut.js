@@ -35,7 +35,7 @@ export async function apiCategoriesPut(req, res) {
   // Tikriname, ar egzistuoja irasas, kuri keltiname redaguoti
   try {
     const sql = "SELECT * FROM categories WHERE id = ?;";
-    const [result] = await connection.execute(sql, [id]);
+    const [result] = await connection.query(sql, [id]);
 
     if (result.length !== 1) {
       return res.json({
@@ -54,7 +54,7 @@ export async function apiCategoriesPut(req, res) {
   // Tikriname, ar egzistuoja kitas jau esantis irasas, kurio pavadinimas sutampa su norimu redaguoti naujuoju pavadinimu
   try {
     const sql = "SELECT * FROM categories WHERE category = ? AND id != ?;";
-    const [result] = await connection.execute(sql, [name, id]);
+    const [result] = await connection.query(sql, [name, id]);
 
     if (result.length !== 0) {
       return res.json({
@@ -73,7 +73,7 @@ export async function apiCategoriesPut(req, res) {
   // Tikriname, ar egzistuoja kitas jau esantis irasas, kurio nuoroda sutampa su norima redaguoti naujaja nuoroda
   try {
     const sql = "SELECT * FROM categories WHERE url_slug = ? AND id != ?;";
-    const [result] = await connection.execute(sql, [url, id]);
+    const [result] = await connection.query(sql, [url, id]);
 
     if (result.length !== 0) {
       return res.json({
@@ -94,7 +94,7 @@ export async function apiCategoriesPut(req, res) {
     const sql = `
             UPDATE categories SET category = ?, url_slug = ?, description = ?, is_published = ?
             WHERE id = ?;`;
-    const [result] = await connection.execute(sql, [
+    const [result] = await connection.query(sql, [
       name,
       url,
       description,

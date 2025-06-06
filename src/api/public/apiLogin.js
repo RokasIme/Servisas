@@ -20,7 +20,7 @@ export async function apiLogin(req, res) {
 
   try {
     const sql = "SELECT * FROM users WHERE email = ? AND password = ?;";
-    const [result] = await connection.execute(sql, [email, password]);
+    const [result] = await connection.query(sql, [email, password]);
 
     if (result.length === 0) {
       return res.json({
@@ -42,7 +42,7 @@ export async function apiLogin(req, res) {
 
   try {
     const sql = "INSERT INTO tokens (text, user_id) VALUES (?, ?);";
-    const [result] = await connection.execute(sql, [loginToken, userObj.id]);
+    const [result] = await connection.query(sql, [loginToken, userObj.id]);
 
     if (result.affectedRows !== 1) {
       return res.json({

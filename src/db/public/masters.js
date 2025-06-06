@@ -10,7 +10,7 @@ export async function getAllMasters() {
         INNER JOIN workshops
         ON masters.workshop_id = workshops.id
         WHERE masters.is_published = 1 AND categories.is_published = 1 `;
-    const [results] = await connection.execute(sql);
+    const [results] = await connection.query(sql);
 
     return results;
   } catch (error) {
@@ -31,7 +31,7 @@ export async function getMastersByCategory(category) {
         WHERE masters.is_published = 1 AND 
             categories.is_published = 1 AND
             url_slug = ? `;
-    const [results] = await connection.execute(sql, [category]);
+    const [results] = await connection.query(sql, [category]);
 
     return results;
   } catch (error) {
@@ -52,7 +52,7 @@ export async function getMastersByWorkshop(workshop) {
             WHERE masters.is_published = 1 AND 
                 categories.is_published = 1 AND
                 workshop = ? `;
-    const [results] = await connection.execute(sql, [workshop]);
+    const [results] = await connection.query(sql, [workshop]);
 
     return results;
   } catch (error) {
@@ -67,7 +67,7 @@ export async function getWorkShops() {
              SELECT *
             FROM workshops
             `;
-    const [results] = await connection.execute(sql);
+    const [results] = await connection.query(sql);
 
     return results;
   } catch (error) {
