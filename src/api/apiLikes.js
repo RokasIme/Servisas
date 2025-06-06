@@ -31,7 +31,7 @@ export async function apiLikesPost(req, res) {
     WHERE user_id = ?
     GROUP BY master_id
     HAVING master_id = ?;`;
-    const [result] = await connection.query(sql, [userId, masterId]);
+    const [result] = await connection.execute(sql, [userId, masterId]);
 
     const sum = +result[0]?.sum ?? 0;
 
@@ -49,7 +49,7 @@ export async function apiLikesPost(req, res) {
   try {
     const sql =
       "INSERT INTO likes (like_count, master_id, user_id) VALUES (?, ?, ?);";
-    const [result] = await connection.query(sql, [1, masterId, userId]);
+    const [result] = await connection.execute(sql, [1, masterId, userId]);
 
     if (result.affectedRows !== 1) {
       return res.json({
