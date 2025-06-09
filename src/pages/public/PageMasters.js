@@ -1,4 +1,6 @@
+import { getAllCategories } from "../../db/admin/categories.js";
 import { getAllLikes, getHeartColor } from "../../db/admin/likes.js";
+import { getAllworkshops } from "../../db/admin/workshops.js";
 import { getAllMasters } from "../../db/public/masters.js";
 import { PageTemplate } from "../../templates/PageTemplate.js";
 
@@ -6,7 +8,8 @@ export class PageMasters extends PageTemplate {
   constructor(req) {
     super(req);
     this.activeMenuIndex = 1;
-    this.pageJS = this.req.user.id ? "masters-like" : "";
+    // this.pageJS = this.req.user.id ? "masters-like" : "";
+    this.pageJS = "mastersFilter";
   }
 
   async masters(category) {
@@ -81,6 +84,31 @@ export class PageMasters extends PageTemplate {
       ? category[0].toUpperCase() + category.slice(1)
       : "All masters";
 
+    // gaunam visas kategorijas
+    const categories = await getAllCategories();
+    let catHTML = '<option value="0">All</option>';
+
+    for (const cat of categories) {
+      catHTML += `<option value="${cat.id}">${cat.category}</option>`;
+    }
+
+    // gaunam visus meistrus
+    const mastersAll = await getAllMasters();
+    let mastersHTML = '<option value="0">All</option>';
+
+    for (const master of mastersAll) {
+      mastersHTML += `<option value="${master.id}">${
+        master.name + " " + master.lastName
+      }</option>`;
+    }
+
+    // gaunam visus servisus
+    const workshopsAll = await getAllworkshops();
+    let workshopsHTML = '<option value="0">All</option>';
+
+    for (const shop of workshopsAll) {
+      workshopsHTML += `<option value= "${shop.id}">${shop.workshop}</option>`;
+    }
     return `
     <main>
       <div class="container">
@@ -90,6 +118,33 @@ export class PageMasters extends PageTemplate {
              </div>
          </div>
        </div>
+        <div class="container mb-5">
+            <form action="" class="row">
+                <div class="col-12 col-lg-3">
+                    <label>Text search</label>
+                    <input class="form-control" type="text">
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <label>Category</label>
+                    <select class="form-control">${catHTML}</select>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <label>Masters full name</label>
+                    <select class="form-control">
+                       ${mastersHTML}
+                    </select>
+                </div>
+                 <div class="col-12 col-md-4 col-lg-3">
+                    <label>Workshop</label>
+                    <select class="form-control">${workshopsHTML}             
+                    </select>
+                </div>
+                <div class="col-12 mt-3">
+                    <input class="form-check-input" type="checkbox">
+                    <label>Only with thumbnails</label>
+                </div>
+            </form>
+        </div>
        ${await this.masters(category)};
      </main>
     `;
