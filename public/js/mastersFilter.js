@@ -21,9 +21,11 @@ function renderCards(data) {
             <img class="bd-placeholder-img card-img-top" src="/img/${
               master.img
             }" alt="Photo" />
-            <div data-count="${master.id}" class="like-count">${""}</div>
+            <div data-count="${master.id}" class="like-count">${
+      master.totalLikes === null ? 0 : master.totalLikes
+    }</div>
             <i data-push="${master.id}" class=" ${
-      "" === 1 ? "heart-color" : ""
+      +master.userLikes === 1 ? "heart-color" : ""
     } click-heart fa fa-heart" aria-hidden="true"></i>
           </div>
           <div class="card-body">
@@ -49,6 +51,37 @@ function renderCards(data) {
   }
 
   mastersDOM.innerHTML = HTML;
+
+  const count2DOM = document.querySelectorAll(".like-count");
+  const heartClick2DOM = document.querySelectorAll(".click-heart");
+
+  for (let i = 0; i < heartClick2DOM.length; i++) {
+    heartClick2DOM[i].addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const masterId = heartClick2DOM[i].dataset.push;
+
+      if (heartClick2DOM[i].classList.contains("heart-color")) {
+        fetch("/api/unlike/" + masterId, {
+          method: "POST",
+        })
+          .then(() => {
+            heartClick2DOM[i].classList.remove("heart-color");
+            count2DOM[i].innerText = +count2DOM[i].innerText - 1;
+          })
+          .catch((err) => console.log(err));
+      } else {
+        fetch("/api/like/" + masterId, {
+          method: "POST",
+        })
+          .then(() => {
+            heartClick2DOM[i].classList.add("heart-color");
+            count2DOM[i].innerText = +count2DOM[i].innerText + 1;
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  }
 }
 
 function getData() {

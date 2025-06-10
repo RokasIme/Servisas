@@ -30,7 +30,7 @@ export async function apiUnLikePost(req, res) {
   try {
     const sql =
       "INSERT INTO likes (like_count, master_id, user_id) VALUES (?, ?, ?);";
-    const [result] = await (sql, [-1, masterId, userId]);
+    const [result] = await connection.execute(sql, [-1, masterId, userId]);
 
     if (result.affectedRows !== 1) {
       return res.json({
