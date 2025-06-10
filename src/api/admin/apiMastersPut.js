@@ -57,7 +57,7 @@ export async function apiMastersPut(req, res) {
   // Tikriname, ar egzistuoja irasas, kuri keltiname redaguoti
   try {
     const sql = "SELECT * FROM masters WHERE id = ?;";
-    const [result] = await connection.query(sql, [id]);
+    const [result] = await connection.execute(sql, [id]);
 
     if (result.length !== 1) {
       return res.json({
@@ -79,7 +79,7 @@ export async function apiMastersPut(req, res) {
             UPDATE masters
             SET name = ?, lastName = ?, img = ?, category_id = ?, experience = ?, workshop_id = ?, is_published = ?
             WHERE id = ?;`;
-    const [result] = await connection.query(sql, [
+    const [result] = await connection.execute(sql, [
       name,
       lastName,
       imageFileName,

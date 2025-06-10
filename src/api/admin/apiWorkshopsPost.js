@@ -19,7 +19,7 @@ export async function apiWorkshopsPost(req, res) {
 
   try {
     const sql = "SELECT * FROM workshops WHERE workshop = ?;";
-    const [result] = await connection.query(sql, [name]);
+    const [result] = await connection.execute(sql, [name]);
 
     if (result.length > 0) {
       return res.json({
@@ -38,7 +38,7 @@ export async function apiWorkshopsPost(req, res) {
   try {
     const sql =
       "INSERT INTO workshops (workshop, city, adress) VALUES (?, ?, ?);";
-    const [result] = await connection.query(sql, [name, city, adress]);
+    const [result] = await connection.execute(sql, [name, city, adress]);
 
     if (result.affectedRows !== 1) {
       return res.json({

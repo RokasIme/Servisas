@@ -14,7 +14,7 @@ export async function apiMasterDelete(req, res) {
 
   try {
     const sql = "DELETE FROM masters WHERE id = ?;";
-    const [result] = await connection.query(sql, [id]);
+    const [result] = await connection.execute(sql, [id]);
 
     if (result.affectedRows !== 1) {
       return res.json({
