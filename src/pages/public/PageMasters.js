@@ -8,8 +8,8 @@ export class PageMasters extends PageTemplate {
   constructor(req) {
     super(req);
     this.activeMenuIndex = 1;
-    // this.pageJS = this.req.user.id ? "masters-like" : "";
-    this.pageJS = "mastersFilter";
+    this.pageJS = this.req.user.id ? "masters-like" : "";
+    this.pageJS2 = "mastersFilter";
   }
 
   async masters(category) {
@@ -65,7 +65,7 @@ export class PageMasters extends PageTemplate {
     return `
 <div class="album py-5 bg-body-tertiary">
   <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div id="masters" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         ${html}
     </div>
   </div>

@@ -16,6 +16,7 @@ import { uploadMasterImage } from "../middleware/uploadThumbnail.js";
 import { apiUpload } from "../api/admin/apiUpload.js";
 import { apiMastersPost } from "../api/admin/apiMastersPost.js";
 import { apiMastersPut } from "../api/admin/apiMastersPut.js";
+import { apiPublicMastersGet } from "../api/public/apiMasters.js";
 
 export const apiRouter = express.Router();
 
@@ -24,12 +25,14 @@ apiRouter.post("/api/login", apiLogin);
 apiRouter.post("/api/", apiLogin);
 apiRouter.get("/api/logout", apiLogout);
 
+apiRouter.get("/api/masters", apiPublicMastersGet);
+
 apiRouter.post("/api/admin/categories", isAdminAPI, apiCategoriesPost);
 apiRouter.put("/api/admin/categories/:id", isAdminAPI, apiCategoriesPut);
 apiRouter.delete("/api/admin/categories/:id", isAdminAPI, apiCategoriesDelete);
 
 apiRouter.delete("/api/admin/master/:id", isAdminAPI, apiMasterDelete);
-apiRouter.post("/api/admin/masters", isAdminAPI, apiCategoriesPost);
+apiRouter.post("/api/admin/masters", isAdminAPI, apiMastersPost);
 apiRouter.put("/api/admin/masters/:id", isAdminAPI, apiMastersPut);
 
 apiRouter.post("/api/admin/workshops", isAdminAPI, apiWorkshopsPost);

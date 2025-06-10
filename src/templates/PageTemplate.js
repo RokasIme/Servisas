@@ -3,6 +3,8 @@ export class PageTemplate {
     this.req = req;
     this.activeMenuIndex = -1;
     this.pageJS = "";
+    this.pageJS2 = "";
+
     this.isPublicPage = true;
   }
 
@@ -77,11 +79,14 @@ export class PageTemplate {
   }
 
   script() {
+    let script = "";
     if (this.pageJS) {
-      return `<script src="/js/${this.pageJS}.js"></script>`;
-    } else {
-      return "";
+      script += `<script src="/js/${this.pageJS}.js"></script>`;
     }
+    if (this.pageJS2) {
+      script += `<script src="/js/${this.pageJS2}.js"></script>`;
+    }
+    return script;
   }
 
   async render() {
