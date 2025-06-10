@@ -141,7 +141,7 @@ export class PageMasters extends PageTemplate {
                 </div>
                 <div class="col-12 mt-3">
                     <input class="form-check-input" type="checkbox">
-                    <label>Only with thumbnails</label>
+                    <label>Only with photos</label>
                 </div>
             </form>
         </div>

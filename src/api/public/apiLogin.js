@@ -1,4 +1,5 @@
 import { connection } from "../../db.js";
+import { hash } from "../../lib/hash.js";
 import { IsValid } from "../../lib/IsValid.js";
 import { randomString } from "../../lib/randomString.js";
 
@@ -19,13 +20,13 @@ export async function apiLogin(req, res) {
   let userObj = null;
 
   try {
-    const sql = "SELECT * FROM users WHERE email = ? AND password = ?;";
-    const [result] = await connection.query(sql, [email, password]);
+    const sql = "SELECT * FROM users WHERE email = ?;";
+    const [result] = await connection.query(sql, [email]);
 
     if (result.length === 0) {
       return res.json({
         status: "error",
-        msg: "Neteisinga el pasto ir slaptazodzio kombinacija, arba toks vartotojas neegzistuoja",
+        msg: "Neteisingas el pastas, arba toks vartotojas neegzistuoja",
       });
     } else {
       userObj = result[0];
@@ -35,6 +36,15 @@ export async function apiLogin(req, res) {
     return res.json({
       status: "error",
       msg: "Serverio klaida, pabandykite prisijungti veliau",
+    });
+  }
+
+  const hashedPassword = hash(password, userObj.salt);
+
+  if (hashedPassword !== userObj.password_hash) {
+    return res.json({
+      status: "error",
+      msg: "Netinkamas slaptazodis",
     });
   }
 
